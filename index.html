@@ -6,7 +6,7 @@
 <title>Hesychia.Cat — Streetwear con el peso de los santos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
   :root{
@@ -18,7 +18,7 @@
     --gold:#a9843f;
     --gold-dim: rgba(169,132,63,0.35);
     --red:#7a2626;
-    --display: 'UnifrakturMaguntia', cursive;
+    --display: 'Playfair Display', serif;
     --serif: 'Cormorant Garamond', serif;
     --sans: 'Space Grotesk', sans-serif;
   }
@@ -66,6 +66,7 @@
   }
   .nav-mark{
     font-family:var(--display);
+    font-weight:700;
     font-size:1.5rem;
     letter-spacing:0.5px;
     color:var(--bone);
@@ -113,7 +114,8 @@
   .hero h1{
     position:relative;
     font-family:var(--display);
-    font-weight:400;
+    font-weight:800;
+    letter-spacing:-0.01em;
     font-size:clamp(3rem, 9vw, 6.4rem);
     line-height:1;
     color:var(--bone);
@@ -346,6 +348,11 @@
     width:16px; height:16px;
     border-radius:50%;
     border:1.5px solid var(--gold-dim);
+    transition:background .3s ease;
+  }
+  .bead.bead-filled{
+    background:var(--gold);
+    border-color:var(--gold);
   }
   .lote-note{
     margin-top:12px;
@@ -440,6 +447,7 @@
   }
   .footer-mark{
     font-family:var(--display);
+    font-weight:700;
     font-size:1.6rem;
     color:var(--bone);
   }
@@ -651,6 +659,24 @@
 </footer>
 
 <script>
+  // ==========================================================
+  // CUPOS DEL LOTE — edita SOLO este número cuando confirmes
+  // un pedido real por WhatsApp, guarda el archivo y vuelve a
+  // arrastrarlo a Netlify. Todo lo demás (texto y bolitas) se
+  // actualiza solo a partir de este número.
+  // ==========================================================
+  const CUPOS_ACTUALES = 0; // <- cámbialo aquí (0 a 6)
+
+  (function actualizarLote(){
+    const total = 6;
+    const actuales = Math.min(Math.max(CUPOS_ACTUALES, 0), total);
+    document.querySelector('[data-lote-count="global"]').textContent = `${actuales} / ${total}`;
+    const beads = document.querySelectorAll('[data-beads="global"] .bead');
+    beads.forEach((bead, i) => {
+      if (i < actuales) bead.classList.add('bead-filled');
+    });
+  })();
+
   // Reemplaza este número por el WhatsApp real del negocio (con indicativo, sin + ni espacios)
   const WHATSAPP_NUMBER = "573003237347";
 
